@@ -7,7 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   entry: {
-    app: './app/index.js'
+    app: './app/index.ts'
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -21,6 +21,18 @@ module.exports = {
         test: /\.js$/,
         use: 'happypack/loader?id=babel',
         exclude: /node_modules/
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg|ttf|eot|woff|otf)$/,
@@ -63,7 +75,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
       '@app': path.resolve(__dirname, '../app'),
     }
