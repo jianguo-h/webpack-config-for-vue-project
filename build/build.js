@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const webpackProdConfig = require('./prod.config');
+const webpackProdConfig = require('./webpack.prod.config');
 
 console.log('building for production...\n');
 webpack(webpackProdConfig, (errout, stats) => {
