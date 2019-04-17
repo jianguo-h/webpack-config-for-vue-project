@@ -5,8 +5,7 @@
 ## 目录按如下
 
 ```
-.
-├── webpack                                     // webpack配置文件
+├── build                                       // webpack启动，打包等配置文件
 ├── config                                      // 其它一些配置
 ├── dist                                        // 打包后的目录
 ├── app                                         // 源码
@@ -25,5 +24,21 @@
 ├── babel.config.js                             // babel配置文件
 ├── .eslintrc.js                                // eslint配置文件
 ├── postcss.config.js                           // postcss配置文件
-.
+```
+
+## 启动
+
+``` bash
+# 安装依赖
+npm i or cnpm i
+如果安装了yarn, 也可以yarn install
+
+# 提取三方库, 该步骤执行一次即可，除非有增加或者减少三方库
+npm run build-dll, 生成三方库的libs文件（如vue全家桶, element-ui， axios等）
+
+# 开发坏境下编译
+npm run dev
+
+# 打包
+npm run build
 ```

@@ -65,14 +65,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@components': path.resolve(__dirname, '../app/components'),
-      '@pages': path.resolve(__dirname, '../app/pages'),
-      '@stroe': path.resolve(__dirname, '../app/stroe'),
-      '@utils': path.resolve(__dirname, '../app/utils'),
-      '@api': path.resolve(__dirname, '../app/api'),
-      '@router': path.resolve(__dirname, '../app/router'),
-      '@styles': path.resolve(__dirname, '../app/styles'),
-      '@static': path.resolve(__dirname, '../app/static'),
+      '@app': path.resolve(__dirname, '../app'),
     }
   },
   optimization: {
