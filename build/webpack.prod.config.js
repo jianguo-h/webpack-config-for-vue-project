@@ -37,9 +37,7 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
   },
   plugins: [
     // 每次打包前清除dist目录
-    new CleanWebpackPlugin([path.resolve(__dirname, '../dist')], {
-      allowExternal: true
-    }),
+    new CleanWebpackPlugin(),
     // dllPlugin
     new webpack.DllReferencePlugin({
       context: __dirname,
