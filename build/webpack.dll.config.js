@@ -17,9 +17,7 @@ const dllConfig = {
     library: '[name]_library'
   },
   plugins: [
-    new CleanWebpackPlugin([libsPath], {
-      allowExternal: true
-    }),
+    new CleanWebpackPlugin(),
     new webpack.DllPlugin({
       context: __dirname,
       name: '[name]_library',
