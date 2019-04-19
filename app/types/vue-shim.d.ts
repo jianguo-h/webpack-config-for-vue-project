@@ -1,6 +1,7 @@
 import Vue from 'vue';
-// import Vuex from 'vuex';
-// import VueRouter, { Route } from 'vue-router';
+import { Store } from 'vuex';
+import VueRouter, { Route } from 'vue-router';
+import { Loading, MessageBox, Notification, Message } from 'element-ui';
 
 declare module '*.vue' {
   export default Vue;
@@ -8,8 +9,16 @@ declare module '*.vue' {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    // '$store': Vuex.Store,
-    // '$route': Route,
-    // '$router': VueRouter,
+    '$store': Store,
+    '$route': Route,
+    '$router': VueRouter,
+    '$axios': any,
+    '$loading': Loading.service,
+    '$msgbox': MessageBox,
+    '$alert': MessageBox.alert,
+    '$confirm': MessageBox.confirm,
+    '$prompt': MessageBox.prompt,
+    '$notify': Notification,
+    '$message': Message,
   }
 }

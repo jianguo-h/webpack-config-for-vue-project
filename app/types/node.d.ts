@@ -1,3 +1,3 @@
-interface NodeModule {
+declare interface NodeModule {
   hot: any
 }
