@@ -6,7 +6,7 @@
     "strict": true,
     "noImplicitAny": false,
     "noImplicitReturns": false,
-    "module": "commonjs",
+    "module": "esNext",
     "moduleResolution": "node",
     "target": "es5",
     "allowJs": true,
