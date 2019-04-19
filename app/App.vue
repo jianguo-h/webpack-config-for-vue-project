@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    hello world!
+    {{ msg }}
     webpack config for vue project
   </div>
 </template>
@@ -10,7 +10,13 @@
 
   @Component
   export default class App extends Vue {
-    
+    msg: string = 'hello world';
+
+    mounted() {
+      // console.log('>>> this.$route', this.$route);
+      // console.log('>>> this.$store', this.$store);
+      // console.log('>>> this.$axios', this.$axios);
+    }
   }
 </script>
 
