@@ -10,7 +10,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const webpackProdConfig = webpackMerge(webpackBaseConfig, {
   mode: 'production',
-  devtool: false,
+  devtool: 'none',
   module: {
     rules: [
       {
