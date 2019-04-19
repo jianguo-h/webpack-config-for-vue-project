@@ -9,7 +9,7 @@ const libsPath = path.resolve(__dirname, '../app/libs');
 const dllConfig = {
   mode: 'production',
   entry: {
-    libs: ['vue'/* , 'vue-router', 'vuex' */]
+    libs: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui']
   },
   output: {
     path: libsPath,
