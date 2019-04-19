@@ -23,14 +23,21 @@ const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler, {
 });
 
 // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', compilation => {
+compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
+  compilation.hooks.htmlWebpackPluginAfterEmit.tap('HtmlWebpackPlugin', () => {
+    webpackHotMiddlewareInstance.publish({
+      action: 'reload'
+    });
+  });
+});
+/*compiler.plugin('compilation', compilation => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
     webpackHotMiddlewareInstance.publish({
       action: 'reload'
     });
     cb();
   });
-});
+}); */
 
 // use middleWare
 app.use(webpackDevMiddlewareInstance);
@@ -41,7 +48,6 @@ new Promise(resolve => {
   _resolve = resolve;
 });
 
-console.log('> Starting dev server...');
 webpackDevMiddlewareInstance.waitUntilValid(() => {
   console.log('server start at ' + url);
   _resolve();
