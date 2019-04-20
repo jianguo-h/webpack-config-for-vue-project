@@ -4,7 +4,10 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module',
-    ecmaVersion: 2018
+    ecmaVersion: 2018,
+    ecmaFeatures: {
+      legacyDecorators: true      // 支持装饰器语法
+    }
   },
   env: {
     browser: true,
@@ -24,7 +27,7 @@ module.exports = {
     'no-unused-vars': 1,                    // 禁止出现未使用过的变量
     'spaced-comment': 0,                    // 要求或禁止在注释前有空白
     'no-multi-spaces': 0,                   // 禁止使用多个空格
-    'keyword-spacing': 0,                   // 强制在关键字前后使用一致的空格
+    'keyword-spacing': 2,                   // 强制在关键字前后使用一致的空格
     'indent': ['error', 2],                 // 强制使用一致的缩进 2个空格
     'no-useless-return': 0,                 // 禁止多余的 return 语句
     'space-before-function-paren': 0,       // 强制在 function的左括号之前使用一致的空格
@@ -54,6 +57,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'import/newline-after-import': 0,
     'import/no-extraneous-dependencies': 0,
+    'class-methods-use-this': 0,            // 强制类方法使用 this
   },
   // https://segmentfault.com/q/1010000015135804
   "overrides": [
