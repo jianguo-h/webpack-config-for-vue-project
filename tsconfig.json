@@ -14,11 +14,11 @@
     "strictPropertyInitialization": false,
     "noImplicitThis": false,
     "paths": {
-      "@app/*": ["app/*"]
+      "@src/*": ["src/*"]
     }
   },
   "include": [
-    "./app/**/*"
+    "./src/**/*"
   ],
   "exclude": [
     "node_modules"
