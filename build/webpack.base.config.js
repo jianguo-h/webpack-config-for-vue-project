@@ -1,13 +1,11 @@
 const path = require('path');
 const config = require('../config');
-const HappyPack = require('happypack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   entry: {
-    app: './app/index.ts'
+    app: './src/index.ts'
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -55,33 +53,17 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(__dirname, '../app/index.html'),
+      template: path.resolve(__dirname, '../src/index.html'),
       filename: 'index.html',
       minify: {
         removeComments: true
       }
-    }),
-    new HappyPack({
-      id: 'babel', // 用id来标识
-      // threads: 4,                    // 开启的子进程的个数
-      threadPool: happyThreadPool, // 共享进程池
-      loaders: ['babel-loader'] // 处理的loader
-    }),
-    new HappyPack({
-      id: 'css',
-      threadPool: happyThreadPool,
-      loaders: ['css-loader', 'postcss-loader']
-    }),
-    new HappyPack({
-      id: 'less',
-      threadPool: happyThreadPool,
-      loaders: ['css-loader', 'postcss-loader', 'less-loader']
     })
   ],
   resolve: {
     extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
-      '@app': path.resolve(__dirname, '../app')
+      '@src': path.resolve(__dirname, '../src')
     }
   },
   optimization: {
