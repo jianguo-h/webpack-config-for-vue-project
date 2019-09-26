@@ -13,23 +13,27 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     filename: 'static/js/[name].[hash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
-    publicPath: process.env.NODE_ENV === 'production' ? config.prod.publicPath : config.dev.publicPath
+    publicPath:
+      process.env.NODE_ENV === 'production'
+        ? config.prod.publicPath
+        : config.dev.publicPath
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: 'happypack/loader?id=babel',
+        use: ['babel-loader'],
         exclude: /node_modules/
       },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
+          'babel-loader',
           {
             loader: 'ts-loader',
             options: {
-              appendTsSuffixTo: [/\.vue$/],
+              appendTsSuffixTo: [/\.vue$/]
             }
           }
         ]
@@ -58,10 +62,10 @@ module.exports = {
       }
     }),
     new HappyPack({
-      id: 'babel',                      // 用id来标识
+      id: 'babel', // 用id来标识
       // threads: 4,                    // 开启的子进程的个数
-      threadPool: happyThreadPool,      // 共享进程池
-      loaders: ['babel-loader']         // 处理的loader
+      threadPool: happyThreadPool, // 共享进程池
+      loaders: ['babel-loader'] // 处理的loader
     }),
     new HappyPack({
       id: 'css',
@@ -72,12 +76,12 @@ module.exports = {
       id: 'less',
       threadPool: happyThreadPool,
       loaders: ['css-loader', 'postcss-loader', 'less-loader']
-    }),
+    })
   ],
   resolve: {
     extensions: ['.js', '.ts', '.vue', '.json'],
     alias: {
-      '@app': path.resolve(__dirname, '../app'),
+      '@app': path.resolve(__dirname, '../app')
     }
   },
   optimization: {
@@ -85,18 +89,18 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-          name: "vendors",
+          name: 'vendors',
           test: /[\\/]node_modules[\\/]/,
-          chunks: "all",
+          chunks: 'all',
           priority: -10,
-          reuseExistingChunk: true,
+          reuseExistingChunk: true
         },
         commons: {
           name: 'commons',
-          chunks: "all",
+          chunks: 'all',
           minChunks: 2,
           priority: -11
-        },
+        }
         /*styles: {
           name: 'styles',
           test: /\.(css|less)$/,

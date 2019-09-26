@@ -4,7 +4,9 @@ const webpackBaseConfig = require('./webpack.base.config');
 
 // add hot-reload related code to entry chunks
 Object.keys(webpackBaseConfig.entry).forEach(name => {
-  webpackBaseConfig.entry[name] = ['webpack-hot-middleware/client'].concat(webpackBaseConfig.entry[name]);
+  webpackBaseConfig.entry[name] = ['webpack-hot-middleware/client'].concat(
+    webpackBaseConfig.entry[name]
+  );
 });
 
 const webpackDevConfig = webpackMerge(webpackBaseConfig, {
@@ -14,31 +16,30 @@ const webpackDevConfig = webpackMerge(webpackBaseConfig, {
     rules: [
       {
         test: /\.less$/,
-        use: ['style-loader', 'happypack/loader?id=less']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'happypack/loader?id=css']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        use: [
+        use: ['vue-loader']
+        /* use: [
           {
             loader: 'vue-loader',
             options: {
-              js: 'happypack/loader?id=babel',
+              js: 'babel-loader',
               css: ['style-loader', 'happypack/loader?id=css'],
               less: ['style-loader', 'happypack/loader?id=less']
             }
           }
-        ],
+        ] */
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 });
 
 module.exports = webpackDevConfig;
