@@ -1,6 +1,6 @@
 # webpack-config-for-vue-project
 
-> 为vue项目开发而搭建的一套 webpack 基础配置，在此配置上进行扩展，支持 ts，推荐使用 vs code 编辑器
+> 为 `vue` 项目开发而搭建的一套 `webpack` 基础配置，在此配置上进行扩展，支持 ts，推荐使用 vs code 编辑器
 
 ## 目录按如下
 
@@ -8,7 +8,7 @@
 ├── build                                       // webpack启动，打包等配置文件
 ├── config                                      // 其它一些配置
 ├── dist                                        // 打包后的目录
-├── app                                         // 源码
+├── src                                         // 源码
 │   ├── api                                     // 接口管理
 │   ├── components                              // 组件
 │   ├── styles                                  // 全局样式
@@ -46,19 +46,19 @@ npm run build
 ```
 
 ## 其他
-项目启动后，在 vs code 编辑器下可能会出现一些检查规则上的错误，这是由于编辑器自身会去检查代码的缘故，这里可以对编辑器原有的配置进行一些修改，首先打开编辑器自身的 **setting.json** 文件，然后增加以下配置即可
+项目启动后，在 vs code 编辑器下可能会出现一些检查规则上的错误，这是由于编辑器自身会去检查代码的缘故，这里可以对编辑器原有的配置进行一些修改，首先打开编辑器自身的 `**setting.json**` 文件，然后增加以下配置即可
 
 ``` json
 {
   "eslint.validate": [
-    "typescript",         // 支持对ts文件的检查
-    "javascript",         // 支持对js文件的检查
-    "javascriptreact",    // 支持对react的检查
-    "html",               // 支持html中的脚本检查
-    "vue"                 // 支持vue中的脚本检查
+    "typescript", 
+    "javascript",
+    "javascriptreact",
+    "html",
+    "vue"
   ],
-  "typescript.validate.enable": false,    // 关闭编辑器自身对ts的检查
-  "javascript.validate.enable": false,    // 关闭编辑器自身对js的检查
-  "vetur.validation.script": false        // 关闭vetur对脚本的检查
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "vetur.validation.script": false
 }
 ```
