@@ -8,7 +8,7 @@ const store = new Vuex.Store({
   getters: {},
   mutations: {},
   actions: {},
-  modules: {},
+  modules: {}
 });
 
 export default store;
