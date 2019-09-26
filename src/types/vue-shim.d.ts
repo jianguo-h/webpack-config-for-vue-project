@@ -9,16 +9,16 @@ declare module '*.vue' {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    '$store': Store,
-    '$route': Route,
-    '$router': VueRouter,
-    '$axios': any,
-    '$loading': Loading.service,
-    '$msgbox': MessageBox,
-    '$alert': MessageBox.alert,
-    '$confirm': MessageBox.confirm,
-    '$prompt': MessageBox.prompt,
-    '$notify': Notification,
-    '$message': Message,
+    $store: Store;
+    $route: Route;
+    $router: VueRouter;
+    $axios: any;
+    $loading: Loading.service;
+    $msgbox: MessageBox;
+    $alert: MessageBox.alert;
+    $confirm: MessageBox.confirm;
+    $prompt: MessageBox.prompt;
+    $notify: Notification;
+    $message: Message;
   }
 }
