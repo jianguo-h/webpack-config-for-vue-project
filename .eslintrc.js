@@ -26,21 +26,20 @@ module.exports = {
     node: true
   },
   rules: {
+    'vue/script-indent': ['off', 2, { baseIndent: 1 }],
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-inferrable-types': ['error', {
-      ignoreParameters: true
+      ignoreParameters: true,
+      ignoreProperties: true
     }]
   },
-  // https://segmentfault.com/q/1010000015135804
   overrides: [
-    // 解决vue文件中js代码的缩进问题
     {
       files: ['*.vue'],
       rules: {
         indent: 'off',
-        'vue/script-indent': ['error', 2, { 'baseIndent': 1 }],
         '@typescript-eslint/explicit-function-return-type': 'off'
       }
     }
