@@ -6,22 +6,22 @@
 </template>
 
 <script lang="ts">
-  import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 
-  @Component
-  export default class App extends Vue {
-    msg: string = 'hello world';
+@Component
+export default class App extends Vue {
+  msg: string = 'hello world';
 
-    mounted() {
-      // console.log('>>> this.$route', this.$route);
-      // console.log('>>> this.$store', this.$store);
-      // console.log('>>> this.$axios', this.$axios);
-    }
+  mounted() {
+    // console.log('>>> this.$route', this.$route);
+    // console.log('>>> this.$store', this.$store);
+    // console.log('>>> this.$axios', this.$axios);
   }
+}
 </script>
 
 <style lang="less">
-  #app {
-    font-size: 30px;
-  }
+#app {
+  font-size: 30px;
+}
 </style>
