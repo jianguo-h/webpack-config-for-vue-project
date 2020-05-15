@@ -3,10 +3,10 @@ module.exports = {
     [
       '@babel/env',
       {
-        modules: false
+        modules: false,
         // 'useBuiltIns': 'usage'
-      }
-    ]
+      },
+    ],
   ],
-  plugins: ['@babel/plugin-syntax-dynamic-import']
+  plugins: ['@babel/plugin-syntax-dynamic-import'],
 };
