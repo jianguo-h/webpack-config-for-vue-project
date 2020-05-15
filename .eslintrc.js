@@ -26,7 +26,7 @@ module.exports = {
   rules: {
     'vue/script-indent': ['off', 2, { baseIndent: 1 }],
     '@typescript-eslint/no-var-requires': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-inferrable-types': [
       'error',
@@ -35,13 +35,16 @@ module.exports = {
         ignoreProperties: true,
       },
     ],
+    '@typescript-eslint/camelcase': [
+      'error',
+      { properties: 'never', ignoreDestructuring: true },
+    ],
   },
   overrides: [
     {
       files: ['*.vue'],
       rules: {
         indent: 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
     {
