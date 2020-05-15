@@ -51,7 +51,7 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
     // dllPlugin
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('../app/libs/libs-manifest.json'),
+      manifest: require('../src/libs/libs-manifest.json'),
     }),
     // 将dllplugin生成的js自动注入到html中
     new AddAssetHtmlPlugin({
