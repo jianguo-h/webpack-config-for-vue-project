@@ -1,9 +1,9 @@
 import express from 'express';
 import webpack from 'webpack';
-// import config from '../config';
 import webpackDevConfig from './webpack.dev.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import open from 'open';
 
 const app = express();
 const devPort = process.env.PORT ?? 8080;
@@ -29,14 +29,9 @@ const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
 app.use(webpackDevMiddlewareInstance);
 app.use(webpackHotMiddlewareInstance);
 
-/* let _resolve;
-new Promise(resolve => {
-  _resolve = resolve;
-}); */
-
-webpackDevMiddlewareInstance.waitUntilValid(() => {
+webpackDevMiddlewareInstance.waitUntilValid(async () => {
   console.log('server start at ' + url);
-  // _resolve();
+  await open(url);
 });
 
 app.listen(devPort);
