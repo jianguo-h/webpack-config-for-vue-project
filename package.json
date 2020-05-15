@@ -5,8 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "env-cmd ts-node build/dev-server.ts",
-    "build": "set NODE_ENV=production&&node build/build.js",
-    "build-dll": "node build/webpack.dll.config.js"
+    "build": "env-cmd -f .env.production ts-node build/build.ts",
+    "build-dll": "env-cmd -f .env.production ts-node build/webpack.dll.config.js"
   },
   "author": "jianguo",
   "license": "ISC",
@@ -14,7 +14,10 @@
     "@babel/core": "^7.9.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
+    "@types/mini-css-extract-plugin": "^0.9.1",
     "@types/node": "^14.0.1",
+    "@types/optimize-css-assets-webpack-plugin": "^5.0.1",
+    "@types/uglifyjs-webpack-plugin": "^1.1.0",
     "@types/webpack": "^4.41.13",
     "@types/webpack-dev-middleware": "^3.7.0",
     "@types/webpack-env": "^1.15.2",
