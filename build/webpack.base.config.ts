@@ -1,5 +1,4 @@
 import path from 'path';
-import config from '../config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { VueLoaderPlugin } from 'vue-loader';
 import { Configuration } from 'webpack';
