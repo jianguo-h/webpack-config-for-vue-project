@@ -1,27 +1,27 @@
 // 项目中的三方库放在这里统一打包，比如vue全家桶, axios等ajax库, 以及一些ui库(如element-ui, iview等)
 
-const path = require('path');
-const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import path from 'path';
+import webpack, { Configuration } from 'webpack';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const libsPath = path.resolve(__dirname, '../app/libs');
-const dllConfig = {
+const dllConfig: Configuration = {
   mode: 'production',
   entry: {
-    libs: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui']
+    libs: ['vue', 'vue-router', 'vuex', 'axios', 'element-ui'],
   },
   output: {
     path: libsPath,
     filename: '[name].[hash:8].js',
-    library: '[name]_library'
+    library: '[name]_library',
   },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.DllPlugin({
       context: __dirname,
       name: '[name]_library',
-      path: path.resolve(libsPath, '[name]-manifest.json')
+      path: path.resolve(libsPath, '[name]-manifest.json'),
     }),
     new UglifyJsPlugin({
       cache: true,
@@ -29,15 +29,15 @@ const dllConfig = {
       uglifyOptions: {
         warnings: false,
         output: {
-          comments: false
+          comments: false,
         },
         compress: {
           drop_console: true,
-          drop_debugger: true
-        }
-      }
-    })
-  ]
+          drop_debugger: true,
+        },
+      },
+    }),
+  ],
 };
 
 webpack(dllConfig, (errout, stats) => {
@@ -48,7 +48,7 @@ webpack(dllConfig, (errout, stats) => {
       modules: false,
       children: false,
       chunks: false,
-      chunkModules: false
+      chunkModules: false,
     }) + '\n\n'
   );
 });
