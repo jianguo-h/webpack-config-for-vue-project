@@ -44,21 +44,3 @@ npm run dev
 # 打包
 npm run build
 ```
-
-## 其他
-项目启动后，在 vs code 编辑器下可能会出现一些检查规则上的错误，这是由于编辑器自身会去检查代码的缘故，这里可以对编辑器原有的配置进行一些修改，首先打开编辑器自身的 **setting.json** 文件，然后增加以下配置即可
-
-``` json
-{
-  "eslint.validate": [
-    "typescript", 
-    "javascript",
-    "javascriptreact",
-    "html",
-    "vue"
-  ],
-  "typescript.validate.enable": false,
-  "javascript.validate.enable": false,
-  "vetur.validation.script": false
-}
-```
