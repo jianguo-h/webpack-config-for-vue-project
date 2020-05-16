@@ -24,7 +24,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    'vue/script-indent': ['off', 2, { baseIndent: 1 }],
+    'vue/script-indent': ['error', 2, { baseIndent: 1 }],
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -51,7 +51,6 @@ module.exports = {
       files: ['*.js'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
   ],
