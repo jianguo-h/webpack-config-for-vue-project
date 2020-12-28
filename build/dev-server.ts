@@ -16,15 +16,6 @@ const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
 });
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
 
-// force page reload when html-webpack-plugin template changes
-/* compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
-  compilation.hooks.htmlWebpackPluginAfterEmit.tap('HtmlWebpackPlugin', () => {
-    webpackHotMiddlewareInstance.publish({
-      action: 'reload',
-    });
-  });
-}); */
-
 // use middleWare
 app.use(webpackDevMiddlewareInstance);
 app.use(webpackHotMiddlewareInstance);
