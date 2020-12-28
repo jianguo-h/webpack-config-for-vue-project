@@ -2,6 +2,9 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { VueLoaderPlugin } from 'vue-loader';
 import { Configuration } from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const webpackBaseConfig: Configuration = {
   entry: {
@@ -15,15 +18,16 @@ const webpackBaseConfig: Configuration = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.tsx?$/,
+        test: /\.(js|ts)$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              cacheCompression: false,
+            },
+          },
           {
             loader: 'ts-loader',
             options: {
@@ -33,12 +37,35 @@ const webpackBaseConfig: Configuration = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|svg|ttf|eot|woff|otf)$/,
+        test: /.less$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        exclude: [
+          /\.(js|mjs|jsx|ts|tsx)$/,
+          /\.html$/,
+          /\.json$/,
+          /\.vue$/,
+          /\.(css|sass|scss|less)$/,
+        ],
         use: [
           {
             loader: 'url-loader',
             options: {
-              name: 'static/images/[name].[hash:7].[ext]',
+              name: 'static/media/[name].[hash:8].[ext]',
             },
           },
         ],
@@ -51,9 +78,20 @@ const webpackBaseConfig: Configuration = {
       inject: true,
       template: path.resolve(__dirname, '../src/index.html'),
       filename: 'index.html',
-      minify: {
-        removeComments: true,
-      },
+      minify: isProduction
+        ? {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          }
+        : undefined,
     }),
   ],
   resolve: {
@@ -63,29 +101,12 @@ const webpackBaseConfig: Configuration = {
     },
   },
   optimization: {
-    runtimeChunk: 'single',
+    runtimeChunk: {
+      name: (entrypoint: { name: string }) => `runtime.${entrypoint.name}`,
+    },
     splitChunks: {
-      cacheGroups: {
-        vendors: {
-          name: 'vendors',
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        commons: {
-          name: 'commons',
-          chunks: 'all',
-          minChunks: 2,
-          priority: -11,
-        },
-        /*styles: {
-          name: 'styles',
-          test: /\.(css|less)$/,
-          chunks: 'all',
-          enforce: true
-        }*/
-      },
+      chunks: 'all',
+      name: false,
     },
   },
 };

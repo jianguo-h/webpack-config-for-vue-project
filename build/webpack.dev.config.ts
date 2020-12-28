@@ -18,27 +18,9 @@ const webpackDevConfig: Configuration = webpackMerge(webpackBaseConfig, {
   module: {
     rules: [
       {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
-      {
         test: /\.vue$/,
         exclude: /node_modules/,
         use: ['vue-loader'],
-        /* use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              js: 'babel-loader',
-              css: ['style-loader', 'happypack/loader?id=css'],
-              less: ['style-loader', 'happypack/loader?id=less']
-            }
-          }
-        ] */
       },
     ],
   },
