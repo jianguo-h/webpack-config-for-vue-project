@@ -16,7 +16,6 @@
 │   ├── store                                   // vuex配置
 │   ├── utils                                   // 工具函数
 │   ├── types                                   // ts类型声明
-│   ├── libs                                    // 打包的三方库, 如vue, vuex等
 │   ├── pages                                   // 页面级组件
 │   ├── static                                  // 静态资源
 │   ├── App.vue                                 // 根组件文件
@@ -35,12 +34,9 @@
 npm i or cnpm i
 如果安装了yarn, 也可以yarn install
 
-# 提取三方库, 该步骤执行一次即可，除非有增加或者减少三方库
-npm run build-dll, 生成三方库的libs文件（如vue全家桶, element-ui， axios等）
-
 # 开发坏境下编译
-npm run dev
+npm run start / yarn start
 
 # 打包
-npm run build
+npm run build / yarn build
 ```
