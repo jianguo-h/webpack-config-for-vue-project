@@ -1,4 +1,3 @@
-import express from 'express';
 import webpack from 'webpack';
 import webpackDevConfig from './webpack.dev.config';
 import WebpackDevServer from 'webpack-dev-server';
