@@ -1,6 +1,7 @@
 import { Configuration } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './webpack.base.config';
+import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 
 const webpackDevConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'development',
@@ -8,16 +9,13 @@ const webpackDevConfig: Configuration = webpackMerge(webpackBaseConfig, {
   output: {
     filename: 'static/js/[name].[fullhash:8].js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        exclude: /node_modules/,
-        use: ['vue-loader'],
-      },
-    ],
-  },
-  plugins: [],
+  plugins: [
+    new ESLintWebpackPlugin({
+      extensions: ['js', 'jsx', 'ts', 'tsx', '.vue'],
+      emitWarning: true,
+      emitError: true,
+    }),
+  ],
 });
 
 export default webpackDevConfig;

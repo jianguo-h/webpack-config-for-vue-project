@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/naming-convention */
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { VueLoaderPlugin } from 'vue-loader';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const isProduction = process.env.NODE_ENV === 'production';
+const styleLoader = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 const webpackBaseConfig: Configuration = {
   entry: {
@@ -34,15 +36,26 @@ const webpackBaseConfig: Configuration = {
             loader: 'ts-loader',
             options: {
               appendTsSuffixTo: [/\.vue$/],
+              transpileOnly: true,
             },
           },
         ],
       },
       {
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        use: ['vue-loader'],
+      },
+      {
         test: /.less$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
+          styleLoader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'less-loader',
         ],
@@ -50,8 +63,13 @@ const webpackBaseConfig: Configuration = {
       {
         test: /\.css$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
+          styleLoader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
         ],
       },
@@ -96,6 +114,12 @@ const webpackBaseConfig: Configuration = {
           }
         : undefined,
     }),
+    new ForkTsCheckerWebpackPlugin({
+      async: true,
+      typescript: {
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
+      },
+    }),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.vue', '.json'],
@@ -104,9 +128,7 @@ const webpackBaseConfig: Configuration = {
     },
   },
   optimization: {
-    runtimeChunk: {
-      name: (entrypoint: { name: string }) => `runtime.${entrypoint.name}`,
-    },
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
       name: false,
