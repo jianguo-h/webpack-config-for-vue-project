@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/naming-convention */
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { VueLoaderPlugin } from 'vue-loader';
 import { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -26,6 +27,7 @@ const webpackBaseConfig: Configuration = {
             options: {
               cacheDirectory: true,
               cacheCompression: false,
+              sourceMaps: !isProduction,
             },
           },
           {
@@ -65,6 +67,7 @@ const webpackBaseConfig: Configuration = {
           {
             loader: 'url-loader',
             options: {
+              limit: 1024 * 8,
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },

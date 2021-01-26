@@ -10,10 +10,7 @@ const port = 8080;
 const compiler = webpack(webpackDevConfig);
 const url = 'http://localhost:' + port;
 
-const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
-  publicPath: webpackDevConfig.output?.publicPath ?? '/',
-  stats: { colors: true },
-});
+const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler);
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
 
 // use middleWare

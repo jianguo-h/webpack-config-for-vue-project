@@ -4,7 +4,7 @@ import webpackBaseConfig from './webpack.base.config';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import TerserPlugin from 'terser-webpack-plugin';
+import TerserWebpackPlugin from 'terser-webpack-plugin';
 
 const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'production',
@@ -20,7 +20,7 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
         exclude: /node_modules/,
         options: {
           loaders: {
-            js: 'happypack/loader?id=babel',
+            js: 'babel-loader',
             less: [
               MiniCssExtractPlugin.loader,
               'css-loader',
@@ -58,15 +58,14 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
           ],
         },
       }),
-      new TerserPlugin({
+      new TerserWebpackPlugin({
         parallel: true,
-        sourceMap: false,
         extractComments: false,
         terserOptions: {
           keep_fnames: false,
           keep_classnames: false,
+          sourceMap: false,
           compress: {
-            warnings: false,
             drop_console: true,
             drop_debugger: true,
             comparisons: false,
