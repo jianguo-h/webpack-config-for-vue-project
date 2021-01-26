@@ -1,16 +1,9 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
-import axios from 'axios';
 import store from './store';
 import router from './router';
-import ElementUI from 'element-ui';
 
-Vue.use(ElementUI);
-Vue.prototype.$axios = axios;
-
-new Vue({
-  el: '#app',
-  store,
-  router,
-  render: h => h(App),
-});
+const app = createApp(App);
+app.use(router);
+app.use(store);
+app.mount('#app');

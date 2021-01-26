@@ -3,7 +3,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+import { VueLoaderPlugin } from 'vue-loader';
 
 const isProduction = process.env.NODE_ENV === 'production';
 

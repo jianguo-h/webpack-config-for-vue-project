@@ -6,18 +6,23 @@
 </template>
 
 <script lang="ts">
-  import { Vue, Component } from 'vue-property-decorator';
+  import { defineComponent } from 'vue';
 
-  @Component
-  export default class App extends Vue {
-    msg: string = 'hello world';
-
+  const App = defineComponent({
+    data() {
+      return {
+        msg: 'hello world',
+      };
+    },
     mounted() {
+      console.log(this.msg);
       // console.log('>>> this.$route', this.$route);
       // console.log('>>> this.$store', this.$store);
       // console.log('>>> this.$axios', this.$axios);
-    }
-  }
+    },
+  });
+
+  export default App;
 </script>
 
 <style lang="less">
