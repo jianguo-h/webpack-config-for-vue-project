@@ -54,6 +54,7 @@ const webpackBaseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              sourceMaps: !isProduction,
             },
           },
           'postcss-loader',
@@ -68,6 +69,7 @@ const webpackBaseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              sourceMaps: !isProduction,
             },
           },
           'postcss-loader',
@@ -114,12 +116,7 @@ const webpackBaseConfig: Configuration = {
           }
         : undefined,
     }),
-    new ForkTsCheckerWebpackPlugin({
-      async: true,
-      typescript: {
-        configFile: path.resolve(__dirname, '../tsconfig.json'),
-      },
-    }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.vue', '.json'],
