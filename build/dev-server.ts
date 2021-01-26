@@ -1,25 +1,43 @@
 import express from 'express';
 import webpack from 'webpack';
 import webpackDevConfig from './webpack.dev.config';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import open from 'open';
+import WebpackDevServer from 'webpack-dev-server';
+import detectPort from 'detect-port';
 
-const app = express();
-const port = 8080;
+const options: WebpackDevServer.Configuration = {
+  hot: true,
+  historyApiFallback: true,
+  open: true,
+  liveReload: true,
+  stats: {
+    errors: true,
+    errorDetails: true,
+    warnings: true,
+    colors: true,
+    timings: true,
+    all: false,
+  },
+  overlay: {
+    warnings: false,
+    errors: true,
+  },
+};
+
+WebpackDevServer.addDevServerEntrypoints(webpackDevConfig, options);
+
 const compiler = webpack(webpackDevConfig);
-const url = 'http://localhost:' + port;
+const server = new WebpackDevServer(compiler, options);
 
-const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler);
-const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
+let port = 8080;
 
-// use middleWare
-app.use(webpackDevMiddlewareInstance);
-app.use(webpackHotMiddlewareInstance);
+async function startDevServer() {
+  const _port = await detectPort(port);
+  if (_port === port) {
+    server.listen(port);
+    return;
+  }
+  port += 1;
+  await startDevServer();
+}
 
-webpackDevMiddlewareInstance.waitUntilValid(async () => {
-  console.log('server start at ' + url);
-  await open(url);
-});
-
-app.listen(port);
+startDevServer();
