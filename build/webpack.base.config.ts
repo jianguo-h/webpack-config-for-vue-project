@@ -54,7 +54,7 @@ const webpackBaseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              sourceMaps: !isProduction,
+              sourceMap: !isProduction,
             },
           },
           'postcss-loader',
@@ -69,7 +69,7 @@ const webpackBaseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              sourceMaps: !isProduction,
+              sourceMap: !isProduction,
             },
           },
           'postcss-loader',
