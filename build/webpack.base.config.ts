@@ -116,7 +116,12 @@ const webpackBaseConfig: Configuration = {
           }
         : undefined,
     }),
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      async: true,
+      typescript: {
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
+      },
+    }),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.vue', '.json'],
