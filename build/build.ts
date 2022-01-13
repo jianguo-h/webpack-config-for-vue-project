@@ -8,9 +8,12 @@ webpack(webpackProdConfig, (err, stats) => {
       stats?.toString({
         errors: true,
         errorDetails: true,
+        errorStack: true,
         warnings: true,
         colors: true,
-        all: false,
+        assets: false,
+        chunks: false,
+        modules: false,
       }) ?? ''
     );
     console.log('Build failed');
@@ -19,11 +22,14 @@ webpack(webpackProdConfig, (err, stats) => {
 
   process.stdout.write(
     stats?.toString({
-      all: false,
+      errors: true,
+      errorDetails: true,
+      errorStack: true,
+      warnings: true,
       colors: true,
-      assets: true,
-      version: true,
-      excludeAssets: /media/,
+      assets: false,
+      chunks: false,
+      modules: false,
     }) + '\n\n'
   );
 

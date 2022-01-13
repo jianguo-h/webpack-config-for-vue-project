@@ -21,7 +21,7 @@ const webpackBaseConfig: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(js|ts)$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: [
           {
