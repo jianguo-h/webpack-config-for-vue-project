@@ -12,4 +12,10 @@ module.exports = {
       { ignore: ['after-comment', 'inside-block'] },
     ],
   },
+  overrides: [
+    {
+      files: ['**/*.less'],
+      customSyntax: 'postcss-less',
+    },
+  ],
 };
