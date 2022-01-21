@@ -22,6 +22,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    curly: 'error',
     'vue/script-indent': ['error', 2, { baseIndent: 1 }],
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
