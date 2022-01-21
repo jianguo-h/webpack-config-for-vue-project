@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    'stylelint-config-html',
-    'stylelint-config-standard',
-    'stylelint-prettier/recommended',
-  ],
+  extends: ['stylelint-config-standard', 'stylelint-prettier/recommended'],
   rules: {
     'keyframes-name-pattern': null,
     'comment-empty-line-before': 'always',
@@ -16,6 +12,10 @@ module.exports = {
     {
       files: ['**/*.less'],
       customSyntax: 'postcss-less',
+    },
+    {
+      files: ['**/*.html', '**/*.vue'],
+      customSyntax: 'postcss-html',
     },
   ],
 };
