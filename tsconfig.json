@@ -8,7 +8,7 @@
     "noImplicitReturns": false,
     "module": "esNext",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "esNext",
     "allowJs": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
@@ -24,6 +24,6 @@
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./index.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,37 +1,56 @@
-import webpack from 'webpack';
-import webpackProdConfig from './webpack.prod.config';
+import { UserConfig } from 'vite';
+import { merge } from 'webpack-merge';
+import baseConfig from './base.config';
+import path from 'path';
 
-console.log('building for production...\n');
-webpack(webpackProdConfig, (err, stats) => {
-  if (err || stats?.hasErrors()) {
-    process.stdout.write(
-      stats?.toString({
-        errors: true,
-        errorDetails: true,
-        errorStack: true,
-        warnings: true,
-        colors: true,
-        assets: false,
-        chunks: false,
-        modules: false,
-      }) ?? ''
-    );
-    console.log('Build failed');
-    throw err;
-  }
-
-  process.stdout.write(
-    stats?.toString({
-      errors: true,
-      errorDetails: true,
-      errorStack: true,
-      warnings: true,
-      colors: true,
-      assets: false,
-      chunks: false,
-      modules: false,
-    }) + '\n\n'
-  );
-
-  console.log('Build successfully \n');
+const buildConfig: UserConfig = merge(baseConfig, {
+  mode: 'production',
+  css: {
+    postcss: {
+      plugins: [
+        {
+          postcssPlugin: 'internal:charset-removal',
+          AtRule: {
+            charset: atRule => {
+              if (atRule.name === 'charset') {
+                atRule.remove();
+              }
+            },
+          },
+        },
+      ],
+    },
+  },
+  esbuild: {
+    legalComments: 'none',
+    minifyWhitespace: true,
+    minifySyntax: true,
+    pure: [...Object.keys(console).map(funcName => `console.${funcName}`)],
+  },
+  build: {
+    brotliSize: false,
+    target: 'modules',
+    outDir: path.resolve(__dirname, '../dist'),
+    assetsDir: 'static',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1024,
+    reportCompressedSize: false,
+    sourcemap: false,
+    manifest: true,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        entryFileNames: 'static/js/app.[hash].entry.js',
+        chunkFileNames: 'static/js/[name].[hash].chunk.js',
+        assetFileNames: chunkInfo => {
+          if (chunkInfo.name.endsWith('.css')) {
+            return 'static/css/[name].[hash].asset.css';
+          }
+          return 'static/media/[name].[hash].asset.[ext]';
+        },
+      },
+    },
+  },
 });
+
+export default buildConfig;

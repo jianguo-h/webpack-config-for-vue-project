@@ -1,11 +1,11 @@
-# webpack-config-for-vue-project
+# vite-config-for-vue-project
 
-> 为 `vue` 项目开发而搭建的一套 `webpack` 基础配置，在此配置上进行扩展，支持 ts，推荐使用 vs code 编辑器
+> 为 `vue` 项目开发而搭建的一套 `vite` 基础配置，在此配置上进行扩展，支持 ts，推荐使用 vs code 编辑器
 
 ## 目录按如下
 
 ```
-├── build                                       // webpack启动，打包等配置文件
+├── build                                       // vite启动，打包等配置文件
 ├── config                                      // 其它一些配置
 ├── dist                                        // 打包后的目录
 ├── src                                         // 源码
@@ -29,7 +29,7 @@
 
 ## 启动
 
-``` bash
+```bash
 # 安装依赖
 npm i or cnpm i
 如果安装了yarn, 也可以yarn install

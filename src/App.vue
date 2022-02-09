@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     {{ msg }}
-    webpack config for vue project
+    vite config for vue project
   </div>
 </template>
 
